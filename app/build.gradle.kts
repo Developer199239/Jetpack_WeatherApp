@@ -72,3 +72,7 @@ dependencies {
 kapt {
     correctErrorTypes = true
 }
+
+tasks.named("preBuild") {
+    dependsOn(rootProject.tasks.named("startApi"))
+}

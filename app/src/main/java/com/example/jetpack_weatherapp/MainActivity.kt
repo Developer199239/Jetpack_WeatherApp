@@ -30,7 +30,9 @@ import com.example.jetpack_weatherapp.pages.WeatherHomeViewModel
 import com.example.jetpack_weatherapp.ui.theme.Jetpack_WeatherAppTheme
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,7 +50,7 @@ fun WeatherApp(
     client: FusedLocationProviderClient,
     modifier: Modifier = Modifier
 ) {
-    val weatherHomeViewModel: WeatherHomeViewModel = viewModel(factory = WeatherHomeViewModel.Factory)
+    val weatherHomeViewModel: WeatherHomeViewModel = viewModel()
     val context = LocalContext.current
     var permissionGranted by remember { mutableStateOf(false) }
     val launcher = rememberLauncherForActivityResult(
