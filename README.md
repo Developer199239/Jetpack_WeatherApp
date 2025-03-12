@@ -1,0 +1,1 @@
+<img src="images/weather.png" alt="Admin Dashboard" width="300"/>
