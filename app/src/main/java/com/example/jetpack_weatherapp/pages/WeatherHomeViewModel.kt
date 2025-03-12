@@ -19,15 +19,18 @@ import com.example.jetpack_weatherapp.data.ForecastWeather
 import com.example.jetpack_weatherapp.data.WeatherRepository
 import com.example.jetpack_weatherapp.data.WeatherRepositoryImpl
 import com.example.jetpack_weatherapp.utils.WEATHER_API_KEY
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.async
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class WeatherHomeViewModel(
-    private val connectivityRepository: ConnectivityRepository
+@HiltViewModel
+class WeatherHomeViewModel @Inject constructor(
+    private val connectivityRepository: ConnectivityRepository,
+    private val weatherRepository: WeatherRepository
 ) : ViewModel(){
-    private val weatherRepository: WeatherRepository = WeatherRepositoryImpl()
     var uiState: WeatherHomeUiState by mutableStateOf(WeatherHomeUiState.Loading)
     private var latitude = 0.0
     private var longitude = 0.0
@@ -64,17 +67,4 @@ class WeatherHomeViewModel(
         val endUrl = "forecast?lat=$latitude&lon=$longitude&appid=$WEATHER_API_KEY&units=imperial";
         return weatherRepository.getForecastWeather(endUrl)
     }
-
-    companion object {
-        val Factory: ViewModelProvider.Factory = viewModelFactory {
-            initializer {
-                val application = (this[APPLICATION_KEY] as Application)
-                val connectivityManager = application.getSystemService(ConnectivityManager::class.java)
-                WeatherHomeViewModel(
-                    connectivityRepository = DefaultConnectivityRepository(connectivityManager)
-                )
-            }
-        }
-    }
-
 }
