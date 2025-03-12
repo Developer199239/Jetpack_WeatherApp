@@ -1,1 +1,1 @@
-<img src="images/weather.png" alt="Admin Dashboard" width="300"/>
+<img src="images/weather.png" alt="App screenshot" width="300"/>
