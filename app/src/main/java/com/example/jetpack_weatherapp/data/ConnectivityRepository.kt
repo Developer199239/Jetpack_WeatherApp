@@ -7,12 +7,13 @@ import com.example.jetpack_weatherapp.pages.ConnectivityState
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import javax.inject.Inject
 
 interface ConnectivityRepository {
     val connectivityState: StateFlow<ConnectivityState>
 }
 
-class DefaultConnectivityRepository(
+class DefaultConnectivityRepository @Inject constructor(
     private val connectivityManager: ConnectivityManager
 ) : ConnectivityRepository {
     private val _connectivityState =
